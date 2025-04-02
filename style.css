@@ -140,14 +140,17 @@ button{
         height: 50px;
         font-size: 16px;
     }
-    #review{
+    #buttons-container{  
+        display: flex;
         flex-direction: column;
-    }
-    #contact{
-        flex-direction: column;
+        gap: 5px;
     }
     #logofull{
-        backround-image: url("https://github.com/Alexsanderbuadze2012/AICAGeo_Content/blob/main/logo_small.jpg?raw=true");
+        background-image: url("https://github.com/Alexsanderbuadze2012/AICAGeo_Content/blob/main/logo_small.jpg?raw=true");
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 50px;
+        height: 50px;
     }
 }
 
