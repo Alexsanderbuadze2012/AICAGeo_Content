@@ -140,6 +140,15 @@ button{
         height: 50px;
         font-size: 16px;
     }
+    #review{
+        flex-direction: column;
+    }
+    #contact{
+        flex-direction: column;
+    }
+    #logofull{
+        backroun-image: URL("https://github.com/Alexsanderbuadze2012/AICAGeo_Content/blob/main/logo_small.jpg?raw=true");
+    }
 }
 
 #logbtn:hover{
