@@ -114,17 +114,29 @@ header{
 }
 
 button{
-    width:120px;
-    height:70px;
+    width: 120px;
+    height: 70px;
     border-radius: 20px;
     background-color: gray;
-    transition: background-color, font-size 0.3s ease-out;
+    transition: background-color 0.3s ease-out, font-size 0.3s ease-out;
     font-family: "Boldonse";
     font-size: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.3s ease-out, font-size 0.3s ease-out;
+}
+
+@media (max-width: 768px) {
+    header{
+        flex-direction: column;
+        height: auto;
+        padding: 10px 15px;
+    }
+    button{
+        width: 100px;
+        height: 50px;
+        font-size: 16px;
+    }
 }
 
 #logbtn:hover{
