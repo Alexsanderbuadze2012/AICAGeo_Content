@@ -103,7 +103,7 @@ header{
     width: 100vw;
     color: white;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     font-weight: bold;
     font-size: 20px;
