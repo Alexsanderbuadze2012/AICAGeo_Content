@@ -7,13 +7,6 @@ body{
     flex-direction: column;
 }
 
-@media (max-width: 768px) {
-    body {
-        background-size: contain;
-        background-repeat: no-repeat;
-    }
-}
-
 #containernpostxt{
     flex-grow: 5;
     position: fixed;
