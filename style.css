@@ -102,11 +102,14 @@ header{
     height: 80px;
     color: white;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     font-weight: bold;
     font-size: 20px;
     gap: 20px;
+    position: relative;
+    z-index: 10;
+    padding: 0 15px;
 }
 
 button{
