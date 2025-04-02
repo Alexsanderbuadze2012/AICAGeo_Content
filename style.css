@@ -1,0 +1,187 @@
+body{
+    background-image: url("https://i.pinimg.com/736x/0e/51/c9/0e51c91ffd3c47e831b1359ed412c2f5.jpg");
+    background-size: cover;
+    background-position: center;
+    font-family: "Boldonse";
+    display: flex;
+    flex-direction: column;
+}
+
+#containernpostxt{
+    flex-grow: 5;
+    position: fixed;
+    display: flex;
+    bottom: 0;
+    font-style: italic;
+    padding-bottom: 100px;
+    padding-left: 1250px;
+}
+
+#containerlogo{
+    overflow: hidden;
+    flex-grow: 1;
+    position: fixed;
+    display: flex;
+    bottom: 0;
+    padding-bottom: 20px;
+    padding-left: 20px;
+}
+
+#inputslogform, #inputssignform{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
+#containersigncls, #containerlogcls{
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
+#inputslogform, #containersigncls, #containerlogcls{
+    margin-bottom: 20px;
+    width: 410px;
+}
+
+#goinform{
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.57);
+    z-index: 999;
+}
+
+#containersigncls, #containerlogcls{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#signlink{
+    font-size: 15px;
+    color: blue;
+}
+
+#inputslogform, #inputssignform{
+    gap: 20px;
+}
+
+#enterlogbtn, #signbtn{
+    transition: background-color 0.3s ease-in;
+    background-color: darkgoldenrod;
+}
+
+#enterlogbtn:hover, #signbtn:hover{
+    background-color: darkolivegreen;
+}
+
+textarea{
+    border-radius: 10px;
+    width: 400px;
+    height: 50px;
+    font-size: 30px;
+    background-color: wheat;
+    resize: none;
+}
+
+header{
+    background-color: black;
+    border-radius: 20px;
+    height: 80px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+    gap: 20px;
+}
+
+button{
+    width:120px;
+    height:70px;
+    border-radius: 20px;
+    background-color: gray;
+    transition: background-color, font-size 0.3s ease-out;
+    font-family: "Boldonse";
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease-out, font-size 0.3s ease-out;
+}
+
+#logbtn:hover{
+    transition: font-size 0.3s ease-out;
+    font-size: 25px;
+    background-color: darkgreen;
+}
+
+
+#review:hover{
+    transition: font-size 0.3s ease-out;
+    font-size: 25px;
+    background-color: gold;
+}
+
+#cnctbtn:hover{
+    background-color: lightcyan;
+}
+
+#aboutbtn:hover{
+    background-color: floralwhite;
+}
+
+div, footer{
+    border-radius: 20px;
+}
+
+#logofull{
+    border-radius: 20px;
+}
+
+footer{
+    background-color: black;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 68.8vw;
+    margin-bottom: 8px;
+    margin-left: 510px;
+}
+
+footer span{
+    margin-left: 5px;
+}
+
+#closeform{
+    background-image: url("https://github.com/Alexsanderbuadze2012/AICAGeo_Content/blob/main/icons8-close-50.png?raw=true");
+    background-color: transparent;
+    border-color: gray;
+    transition: border-color ease-out 0.3s;
+    border-width: 5px;
+    font-size: 40px;
+    height: 58px;
+    width: 55px;
+}
+
+#closeform:hover{
+    background-image: url("https://github.com/Alexsanderbuadze2012/AICAGeo_Content/blob/main/icons8-close.gif?raw=true&t=1");
+    border-color: red;
+    transition: border-color ease-in 0.3s;
+}

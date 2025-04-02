@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AICA საქართველო</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="https://github.com/Alexsanderbuadze2012/AICAGeo_Content/blob/main/logo_small.jpg?raw=true" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Boldonse&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <p>Welcome, Guest!</p>
+        <button id="logbtn" onclick="showlogform()">Log in</button>
+        <button id="aboutbtn" onclick="myFunction()">About us</button>
+        <button id="review">Review</button>
+        <button id="cnctbtn">Contact</button>
+    </header>
+    <div id="containernpostxt">
+        <h4>Nobody has posted anything yet...</h4>
+    </div>
+    <div id="goinform">
+        <div id="containerlogcls">
+            <h2>Login to AICA საქართველო</h2>
+            <button id="closeform" onclick="closeform()"></button>
+        </div>
+        <div id="inputslogform">
+            <textarea id="usernamelog" placeholder="Type your username"></textarea>
+            <textarea id="passwordlog" placeholder="Type your password"></textarea>
+            <a id="signlink" onclick="signlink()">Sign up instead...</a>
+            <button id="enterlogbtn" onclick="showlogform()">Log In</button>
+        </div>
+        <div id="containersigncls">
+            <h2>Sign up to AICA საქართ.</h2>
+            <button id="closeform" onclick="closeform()"></button>
+        </div>
+        <div id="inputssignform">
+            <textarea id="usernamesign" placeholder="Create Username"></textarea>
+            <textarea id="passwordsign" placeholder="Create memorable password"></textarea>
+            <button id="signbtn">Sign Up</button>
+        </div>
+    </div>
+    <div id="containerlogo">
+        <img id="logofull" src="https://github.com/Alexsanderbuadze2012/AICAGeo_Content/blob/main/logo_full.jpg?raw=true">
+    </div>
+    <footer>
+        &copy; <span id="year"></span> 
+        <span>AICA საქართველო · All rights reserved</span>
+        <span id="time"></span>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
