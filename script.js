@@ -7,6 +7,12 @@ const containersigncls = document.getElementById("containersigncls");
 const signlink = document.getElementById("signlink");
 history.pushState(null, "", "/home");
 
+document.addEventListener("DOMContentLoaded", function() {
+    if (navigator.userAgent.toLowerCase().match(/mobile|android|iphone|ipad|ipod/)){
+        alert("Design of AICA Geo will be broken! Please enable 'Desktop Mode' on your phone");
+    }
+});
+
 function displayTime(){
     const currentTime = new Date();
     document.getElementById("time").innerText = currentTime.toLocaleTimeString();
