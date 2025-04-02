@@ -35,16 +35,8 @@ function closeform(){
 signlink.addEventListener("click", function(event) {
     event.preventDefault(); // Prevent default navigation
     containerlogcls.style.display = "none";
-
-    if (this.textContent === "Sign up instead...") {
-        this.textContent = "Log in instead...";
-        document.getElementById("inputslogform").style.display = "none"; 
-        document.getElementById("inputssignform").style.display = "block";
-        history.pushState(null, "", "/signin"); // Change URL to /signin
-    } else {
-        this.textContent = "Sign up instead...";
-        document.getElementById("inputslogform").style.display = "block"; 
-        document.getElementById("inputssignform").style.display = "none";
-        history.pushState(null, "", "/"); // Change URL back to /
+    containersigncls.style.display = "flex";
+    inputssignform.style.display = "flex";
+    history.pushState(null, "", "/");
     }
 });
