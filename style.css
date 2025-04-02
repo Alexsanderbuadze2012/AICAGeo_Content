@@ -1,4 +1,5 @@
 body{
+    color: white;
     background-image: url("https://i.pinimg.com/736x/0e/51/c9/0e51c91ffd3c47e831b1359ed412c2f5.jpg");
     background-size: cover;
     background-position: center;
@@ -124,34 +125,7 @@ button{
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-@media (max-width: 768px){
-    header{
-        flex-direction: row;
-        height: 80px;
-        font-size: 16px;
-        gap: 10px;
-        padding: 10px 15px;
-        justify-content: flex-start;
-    }
-    button{
-        width: 100px;
-        height: 50px;
-        font-size: 16px;
-    }
-    #buttons-container{  
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-    }
-    #logofull{
-        background-image: url("https://github.com/Alexsanderbuadze2012/AICAGeo_Content/blob/main/logo_small.jpg?raw=true");
-        background-size: contain;
-        background-repeat: no-repeat;
-        width: 50px;
-        height: 50px;
-    }
+    color: white;
 }
 
 #logbtn:hover{
