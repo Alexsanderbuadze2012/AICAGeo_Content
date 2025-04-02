@@ -147,7 +147,7 @@ button{
         flex-direction: column;
     }
     #logofull{
-        backroun-image: URL("https://github.com/Alexsanderbuadze2012/AICAGeo_Content/blob/main/logo_small.jpg?raw=true");
+        backround-image: url("https://github.com/Alexsanderbuadze2012/AICAGeo_Content/blob/main/logo_small.jpg?raw=true");
     }
 }
 
