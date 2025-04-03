@@ -5,6 +5,7 @@ const inputssignform = document.getElementById("inputssignform");
 const containerlogcls = document.getElementById("containerlogcls");
 const containersigncls = document.getElementById("containersigncls");
 const signlink = document.getElementById("signlink");
+let welcometext = document.getElementById("welcometext");
 history.pushState(null, "", "/home");
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -51,6 +52,7 @@ function signUp(){
         let users = JSON.parse(localStorage.getItem('users')) || [];
         users.push({ username, password });
         localStorage.setItem('users', JSON.stringify(users));
+        welcometext.content = "Welcome" + username;
         alert("Sign Up Successful!");
         showlogform();
     } 
@@ -68,6 +70,8 @@ function logIn(){
 
     if(user){
         alert("Logged in as " + username);
+        welcometext.content = "Welcome" + username;
+        
         localStorage.setItem('loggedInUser', username);
         window.location.href = '/home';
     }
