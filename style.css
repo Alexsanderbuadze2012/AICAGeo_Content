@@ -23,6 +23,15 @@ body{
     background-color: red;
 }
 
+#createpostbtn{
+    display: none;
+}
+
+#createpostbtn:hover{
+    transition: background-color 0.2s ease-in;
+    background-color: darkpurple;
+}
+
 #containerlogo{
     overflow: hidden;
     flex-grow: 1;
