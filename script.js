@@ -111,3 +111,7 @@ function logout(){
     alert("You have been logged out.");
     window.location.href = "/home";
 }
+
+function createpost(){
+    addPost.style.display = "flex";
+}
