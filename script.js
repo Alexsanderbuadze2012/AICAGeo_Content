@@ -48,15 +48,19 @@ function signUp(){
     const username = document.getElementById("usernamesign").value;
     const password = document.getElementById("passwordsign").value;
 
-    if(username && password){
+    if (username && password) {
         let users = JSON.parse(localStorage.getItem('users')) || [];
+        const userExists = users.some(u => u.username === username);
+        if (userExists) {
+            alert("Username already exists. Please choose another.");
+            return;
+        }
         users.push({ username, password });
         localStorage.setItem('users', JSON.stringify(users));
-        welcometext.content = "Welcome" + username;
+        welcometext.textContent = "Welcome " + username;
         alert("Sign Up Successful!");
         showlogform();
-    } 
-    else{
+    } else {
         alert("Please fill in both fields.");
     }
 }
@@ -68,21 +72,19 @@ function logIn(){
 
     const user = users.find(u => u.username === username && u.password === password);
 
-    if(user){
+    if (user){
         alert("Logged in as " + username);
-        welcometext.content = "Welcome" + username;
-        
+        welcometext.textContent = "Welcome " + username;
         localStorage.setItem('loggedInUser', username);
         window.location.href = '/home';
-    }
-    else{
-        alert("Invalid info!");
+    } else {
+        alert("Either account does not exist or invalid inputs! | ან ანგარიში არ არსებობს ან თქვენი შეყვანილი ინფორმაცია არასწორია!");
     }
 }
 
 function checkLoginStatus(){
     const loggedInUser = localStorage.getItem('loggedInUser');
-    if(loggedInUser){
+    if (loggedInUser) {
         document.querySelector("header p").textContent = "Welcome, " + loggedInUser + "!";
     }
 }
