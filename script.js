@@ -25,9 +25,8 @@ function showlogform(){
     goinform.style.display = "flex";
     inputssignform.style.display = "none";
     inputslogform.style.display = "flex";
-    inputssignform.style.display = "none";
     containersigncls.style.display = "none";
-    containerslogcls.style.display = "flex";
+    containerlogcls.style.display = "flex";
 }
 
 function closeform(){
@@ -41,7 +40,5 @@ signlink.addEventListener("click", function(event) {
     inputslogform.style.display = "none";
     containerlogcls.style.display = "none";
     containersigncls.style.display = "flex";
-    inputssignform.style.display = "flex";
     history.pushState(null, "", "/");
-    }
 });
