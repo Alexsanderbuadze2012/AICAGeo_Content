@@ -77,16 +77,27 @@ function logIn(){
         welcometext.textContent = "Welcome " + username;
         localStorage.setItem('loggedInUser', username);
         window.location.href = '/home';
-    } else {
+    }
+    else{
         alert("Either account does not exist or invalid inputs! | ან ანგარიში არ არსებობს ან თქვენი შეყვანილი ინფორმაცია არასწორია!");
     }
 }
 
 function checkLoginStatus(){
     const loggedInUser = localStorage.getItem('loggedInUser');
-    if (loggedInUser) {
+    const logoutBtn = document.getElementById("logoutbtn");
+    const logBtn = document.getElementById("logbtn");
+    
+    if (loggedInUser){
         document.querySelector("header p").textContent = "Welcome, " + loggedInUser + "!";
+        logoutBtn.style.display = "block";
+        logBtn.style.display = "none";
+    } 
+    else{
+        logoutBtn.style.display = "none";
+        logBtn.style.display = "block";
     }
 }
+
 
 checkLoginStatus();
