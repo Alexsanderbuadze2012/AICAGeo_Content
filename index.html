@@ -41,8 +41,12 @@
             <input id="passwordsign" type="password" placeholder="Create memorable password">
             <button id="signbtn" onclick="signUp()">Sign Up</button>
         </div>
-        <div id="createpostform">
+        <div id="containerpostcls">
             <h1>Make a Post!</h1>
+            <button id="closeform" onclick="closeform()"></button>
+        </div>
+        <div id="createpostform">
+            <button id="closeform" onclick="closeform()"></button>
             <textarea id="posttext" maxlength="2000"></textarea>
             <button id="publishpost" onclick="publishPost()">Publish post</button>
         </div>
