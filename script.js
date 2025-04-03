@@ -7,7 +7,7 @@ const containersigncls = document.getElementById("containersigncls");
 const signlink = document.getElementById("signlink");
 history.pushState(null, "", "/home");
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function(){
     if (navigator.userAgent.toLowerCase().match(/mobile|android|iphone|ipad|ipod/)){
         alert("Design of AICA Geo will be broken! Please enable 'Desktop Mode' on your phone");
     }
@@ -34,7 +34,7 @@ function closeform(){
     goinform.style.display = "none";
 }
 
-signlink.addEventListener("click", function(event) {
+signlink.addEventListener("click", function(event){
     event.preventDefault();
     inputssignform.style.display = "flex";
     inputslogform.style.display = "none";
@@ -42,3 +42,45 @@ signlink.addEventListener("click", function(event) {
     containersigncls.style.display = "flex";
     history.pushState(null, "", "/");
 });
+
+function signUp(){
+    const username = document.getElementById("usernamesign").value;
+    const password = document.getElementById("passwordsign").value;
+
+    if(username && password){
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        users.push({ username, password });
+        localStorage.setItem('users', JSON.stringify(users));
+        alert("Sign Up Successful!");
+        showlogform();
+    } 
+    else{
+        alert("Please fill in both fields.");
+    }
+}
+
+function logIn(){
+    const username = document.getElementById("usernamelog").value;
+    const password = document.getElementById("passwordlog").value;
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+
+    const user = users.find(u => u.username === username && u.password === password);
+
+    if(user){
+        alert("Logged in as " + username);
+        localStorage.setItem('loggedInUser', username);
+        window.location.href = '/home';
+    }
+    else{
+        alert("Invalid info!");
+    }
+}
+
+function checkLoginStatus(){
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if(loggedInUser){
+        document.querySelector("header p").textContent = "Welcome, " + loggedInUser + "!";
+    }
+}
+
+checkLoginStatus();
