@@ -113,5 +113,6 @@ function logout(){
 }
 
 function createPost(){
+    goinform.style.display = "flex";
     createpostform.style.display = "flex";
 }
