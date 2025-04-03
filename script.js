@@ -48,10 +48,10 @@ function signUp(){
     const username = document.getElementById("usernamesign").value;
     const password = document.getElementById("passwordsign").value;
 
-    if (username && password) {
+    if (username && password){
         let users = JSON.parse(localStorage.getItem('users')) || [];
         const userExists = users.some(u => u.username === username);
-        if (userExists) {
+        if (userExists){
             alert("Username already exists. Please choose another.");
             return;
         }
@@ -60,7 +60,8 @@ function signUp(){
         welcometext.textContent = "Welcome " + username;
         alert("Sign Up Successful!");
         showlogform();
-    } else {
+    } 
+    else{
         alert("Please fill in both fields.");
     }
 }
@@ -97,6 +98,12 @@ function checkLoginStatus(){
         logoutBtn.style.display = "none";
         logBtn.style.display = "block";
     }
+}
+
+function logout(){
+    localStorage.removeItem("loggedInUser");
+    alert("You have been logged out.");
+    window.location.href = "/home";
 }
 
 
