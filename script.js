@@ -94,12 +94,12 @@ function checkLoginStatus(){
         document.querySelector("header p").textContent = "Welcome, " + loggedInUser + "!";
         logoutBtn.style.display = "block";
         logBtn.style.display = "none";
-        addPost.style.display = "block";
+        createpostbtn.style.display = "block";
     } 
     else{
         logoutBtn.style.display = "none";
         logBtn.style.display = "block";
-        addPost.style.display = "none";
+        createpostbtn.style.display = "none";
     }
 }
 
