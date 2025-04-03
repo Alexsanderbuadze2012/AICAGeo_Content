@@ -102,6 +102,7 @@ function checkLoginStatus(){
 
 function logout(){
     localStorage.removeItem("loggedInUser");
+    welcometext.textcontent = "Welcome, Guest";
     alert("You have been logged out.");
     window.location.href = "/home";
 }
