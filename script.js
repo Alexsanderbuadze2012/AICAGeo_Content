@@ -6,7 +6,7 @@ const containerlogcls = document.getElementById("containerlogcls");
 const containersigncls = document.getElementById("containersigncls");
 const signlink = document.getElementById("signlink");
 let welcometext = document.getElementById("welcometext");
-const addPost = document.getElementById("createpostbtn");
+const createpostform = document.getElementById("createpostform");
 history.pushState(null, "", "/home");
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -112,6 +112,6 @@ function logout(){
     window.location.href = "/home";
 }
 
-function createpost(){
-    addPost.style.display = "flex";
+function createPost(){
+    createpostform.style.display = "flex";
 }
