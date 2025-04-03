@@ -24,7 +24,10 @@ function showlogform(){
     history.pushState(null, "", "/login");
     goinform.style.display = "flex";
     inputssignform.style.display = "none";
+    inputslogform.style.display = "flex";
+    inputssignform.style.display = "none";
     containersigncls.style.display = "none";
+    containerslogcls.style.display = "flex";
 }
 
 function closeform(){
@@ -33,7 +36,9 @@ function closeform(){
 }
 
 signlink.addEventListener("click", function(event) {
-    event.preventDefault(); // Prevent default navigation
+    event.preventDefault();
+    inputssignform.style.display = "flex";
+    inputslogform.style.display = "none";
     containerlogcls.style.display = "none";
     containersigncls.style.display = "flex";
     inputssignform.style.display = "flex";
