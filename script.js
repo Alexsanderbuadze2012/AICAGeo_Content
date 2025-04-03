@@ -88,18 +88,22 @@ function checkLoginStatus(){
     const loggedInUser = localStorage.getItem('loggedInUser');
     const logoutBtn = document.getElementById("logoutbtn");
     const logBtn = document.getElementById("logbtn");
-    
+    const addPost = document.getElementById("createpostbtn");
+
     if (loggedInUser){
         document.querySelector("header p").textContent = "Welcome, " + loggedInUser + "!";
         logoutBtn.style.display = "block";
         logBtn.style.display = "none";
+        createPostBtn.style.display = "block";
     } 
     else{
         logoutBtn.style.display = "none";
         logBtn.style.display = "block";
+        addPost.style.display = "none";
     }
 }
 
+document.addEventListener("DOMContentLoaded", checkLoginStatus);
 function logout(){
     localStorage.removeItem("loggedInUser");
     welcometext.textcontent = "Welcome, Guest";
