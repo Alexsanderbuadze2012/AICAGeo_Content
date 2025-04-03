@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <p>Welcome, Guest!</p>
+        <p id="welcometext">Welcome, Guest!</p>
         <button id="logbtn" onclick="showlogform()">Log in</button>
         <button id="aboutbtn" onclick="myFunction()">About us</button>
         <button id="review">Review</button>
@@ -28,7 +28,7 @@
             <textarea id="usernamelog" placeholder="Type your username"></textarea>
             <textarea id="passwordlog" placeholder="Type your password"></textarea>
             <a id="signlink" onclick="signlink()">Sign up instead...</a>
-            <button id="enterlogbtn" onclick="showlogform()">Log In</button>
+            <button id="enterlogbtn" onclick="logIn()">Log In</button>
         </div>
         <div id="containersigncls">
             <h2>Sign up to AICA საქართ.</h2>
@@ -37,7 +37,7 @@
         <div id="inputssignform">
             <textarea id="usernamesign" placeholder="Create Username"></textarea>
             <textarea id="passwordsign" placeholder="Create memorable password"></textarea>
-            <button id="signbtn">Sign Up</button>
+            <button id="signbtn" onclick="signUp">Sign Up</button>
         </div>
     </div>
     <div id="containerlogo">
