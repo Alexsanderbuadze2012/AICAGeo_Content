@@ -25,6 +25,7 @@ body{
 
 #createpostbtn{
     display: none;
+    width: 124px;
 }
 
 #createpostbtn:hover{
