@@ -7,6 +7,7 @@ const containersigncls = document.getElementById("containersigncls");
 const signlink = document.getElementById("signlink");
 let welcometext = document.getElementById("welcometext");
 const createpostform = document.getElementById("createpostform");
+const containerpostcls = document.getElementById("containerpostcls");
 history.pushState(null, "", "/home");
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -115,4 +116,5 @@ function logout(){
 function createPost(){
     goinform.style.display = "flex";
     createpostform.style.display = "flex";
+    containerpostcls.style.display = "flex";
 }
