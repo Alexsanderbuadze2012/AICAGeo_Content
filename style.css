@@ -8,6 +8,11 @@ body{
     flex-direction: column;
 }
 
+#posttext{
+    width: 100vw;
+    height: 100vh;
+}
+
 #containernpostxt{
     flex-grow: 5;
     position: fixed;
@@ -16,6 +21,16 @@ body{
     font-style: italic;
     padding-bottom: 100px;
     padding-left: 1250px;
+}
+
+#createpostform{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    width: 100vw;
+    height: 100vw;
 }
 
 #logoutbtn:hover{
