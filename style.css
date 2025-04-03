@@ -89,7 +89,7 @@ body{
     background-color: darkolivegreen;
 }
 
-textarea{
+textarea, input{
     border-radius: 10px;
     width: 400px;
     height: 50px;
