@@ -6,6 +6,7 @@ const containerlogcls = document.getElementById("containerlogcls");
 const containersigncls = document.getElementById("containersigncls");
 const signlink = document.getElementById("signlink");
 let welcometext = document.getElementById("welcometext");
+const addPost = document.getElementById("createpostbtn");
 history.pushState(null, "", "/home");
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -58,7 +59,7 @@ function signUp(){
         users.push({ username, password });
         localStorage.setItem('users', JSON.stringify(users));
         welcometext.textContent = "Welcome " + username;
-        alert("Sign Up Successful!");
+        alert("You have been signed up!");
         showlogform();
     } 
     else{
@@ -88,13 +89,12 @@ function checkLoginStatus(){
     const loggedInUser = localStorage.getItem('loggedInUser');
     const logoutBtn = document.getElementById("logoutbtn");
     const logBtn = document.getElementById("logbtn");
-    const addPost = document.getElementById("createpostbtn");
 
     if (loggedInUser){
         document.querySelector("header p").textContent = "Welcome, " + loggedInUser + "!";
         logoutBtn.style.display = "block";
         logBtn.style.display = "none";
-        createPostBtn.style.display = "block";
+        addPost.style.display = "block";
     } 
     else{
         logoutBtn.style.display = "none";
@@ -104,12 +104,10 @@ function checkLoginStatus(){
 }
 
 document.addEventListener("DOMContentLoaded", checkLoginStatus);
+
 function logout(){
     localStorage.removeItem("loggedInUser");
-    welcometext.textcontent = "Welcome, Guest";
+    welcometext.textContent = "Welcome, Guest";
     alert("You have been logged out.");
     window.location.href = "/home";
 }
-
-
-checkLoginStatus();
