@@ -13,6 +13,13 @@ body{
     height: 50vh;
 }
 
+#containerpostcls{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #containernpostxt{
     flex-grow: 5;
     position: fixed;
