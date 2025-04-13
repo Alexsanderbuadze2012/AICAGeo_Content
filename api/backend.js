@@ -38,6 +38,10 @@ app.post("/api/login", (req, res) =>{
     res.status(401).json({ message: "Please enter valid username and password!" });
 });
 
+app.get('*', (req, res) =>{
+    res.sendFile(path.join(__dirname, '../public', 'index.html'));
+});
+
 app.post("/api/logout", (req, res) =>{
     res.status(200).json({ message: "Logged out successfully!" });
 });
