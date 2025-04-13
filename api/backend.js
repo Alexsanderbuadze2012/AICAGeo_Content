@@ -6,9 +6,13 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 let users = [];
 
-app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "../public"))); // serving static files
+// Serve static files
+app.use(express.static(path.join(__dirname, "../public"))); 
 
+// Middleware to parse JSON data
+app.use(bodyParser.json());
+
+// Handle API Routes
 app.post("/api/signup", (req, res) => {
     const { username, password } = req.body;
 
@@ -19,7 +23,7 @@ app.post("/api/signup", (req, res) => {
     }
 
     users.push({ username, password });
-    res.status(201).json({ message: "Signup successful" });
+    res.status(201).json({ message: "User signed up successfully" });
 });
 
 app.post("/api/login", (req, res) => {
@@ -35,19 +39,8 @@ app.post("/api/logout", (req, res) => {
     res.status(200).json({ message: "Logged out successfully" });
 });
 
-app.get("/home", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public", "index.html"));
-});
-
-app.get("/login", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public", "index.html"));
-});
-
-app.get("/signup", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public", "index.html"));
-});
-
-app.get("*", (req, res) => {
+// Handle all other routes by sending index.html
+app.get(["/home", "/login", "/signup", "/"], (req, res) => {
     res.sendFile(path.join(__dirname, "../public", "index.html"));
 });
 
