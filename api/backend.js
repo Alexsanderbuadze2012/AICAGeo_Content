@@ -1,71 +1,100 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const path = require("path");
-const jwt = require("jsonwebtoken");
-const cookieParser = require("cookie-parser");
+const express = require('express');
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
+const bcrypt = require('bcryptjs');
 const app = express();
+const port = 3000;
 
-const PORT = process.env.PORT || 3000;
-const SECRET_KEY = "your_secret_key"; // Use a secret key for JWT signing
+// Middleware
+app.use(express.json());
+app.use(cookieParser());
 
-let users = []; // In-memory users for simplicity (consider using a database in production)
+// Mock database (Replace with real database in production)
+const users = [
+  { username: 'testuser', password: '$2a$10$wWq7I8lYNllj3Pja9wcdpe9MfP0zIkSjqb2lxl.HOYhFBeQpIHj/e', // Password: 'password'
+    posts: [] 
+  }
+];
 
-// Serve static files
-app.use(express.static(path.join(__dirname, "../public"))); 
-app.use(cookieParser()); // Use cookie-parser for cookie handling
+// JWT Secret
+const JWT_SECRET = 'your_jwt_secret';
 
-// Middleware to parse JSON data
-app.use(bodyParser.json());
-
-// Handle API Routes
-app.post("/api/signup", (req, res) => {
+// Route: Login
+app.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
-
-    if (!username || !password) return res.status(400).json({ message: "Username and password required" });
-
-    if (users.some(u => u.username === username)) {
-        return res.status(400).json({ message: "Account already exists" });
+    
+    // Find user
+    const user = users.find(u => u.username === username);
+    if (!user) {
+        return res.status(400).json({ message: "Invalid username or password!" });
     }
 
-    users.push({ username, password });
-    res.status(201).json({ message: "User signed up successfully" });
-});
-
-// Login API with JWT
-app.post("/api/login", (req, res) => {
-    const { username, password } = req.body;
-
-    const user = users.find(u => u.username === username && u.password === password);
-    if (user) {
-        // Create a JWT token
-        const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: '1h' }); // Token expires in 1 hour
-        res.cookie('authToken', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' }); // Set token in cookie
-        return res.status(200).json({ message: `Welcome back, ${username}` });
+    // Check password
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword) {
+        return res.status(400).json({ message: "Invalid username or password!" });
     }
 
-    res.status(401).json({ message: "Invalid username or password" });
+    // Create JWT token
+    const token = jwt.sign({ username: user.username }, JWT_SECRET, { expiresIn: '1h' });
+
+    // Send response with token
+    res.json({ message: `Welcome back, ${username}!`, token });
 });
 
-// Middleware to verify JWT token
-function authenticateToken(req, res, next) {
-    const token = req.cookies.authToken || req.header('Authorization')?.split(' ')[1];
-    if (!token) return res.status(401).json({ message: "Access denied" });
+// Route: Protected (Check if user is logged in)
+app.get('/api/protected', (req, res) => {
+    const token = req.headers['authorization']?.split(' ')[1];
 
-    jwt.verify(token, SECRET_KEY, (err, user) => {
-        if (err) return res.status(403).json({ message: "Invalid or expired token" });
-        req.user = user;
-        next();
+    if (!token) {
+        return res.status(401).json({ message: 'No token provided' });
+    }
+
+    jwt.verify(token, JWT_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ message: 'Invalid or expired token' });
+        }
+
+        // User is authenticated
+        const user = users.find(u => u.username === decoded.username);
+        res.json({ message: 'You are logged in!', user });
     });
-}
-
-// Example of a protected route
-app.get("/api/protected", authenticateToken, (req, res) => {
-    res.status(200).json({ message: "You are logged in!", user: req.user });
 });
 
-// Handle all other routes by sending index.html
-app.get(["/home", "/login", "/signup", "/"], (req, res) => {
-    res.sendFile(path.join(__dirname, "../public", "index.html"));
+// Route: Logout (Clear cookie)
+app.post('/api/logout', (req, res) => {
+    res.clearCookie('authToken');  // Clear the token from the cookie
+    res.json({ message: 'You have been logged out' });
 });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Route: Create Post
+app.post('/api/createPost', (req, res) => {
+    const token = req.headers['authorization']?.split(' ')[1];
+
+    if (!token) {
+        return res.status(401).json({ message: 'No token provided' });
+    }
+
+    jwt.verify(token, JWT_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ message: 'Invalid or expired token' });
+        }
+
+        // User is authenticated
+        const user = users.find(u => u.username === decoded.username);
+        const { content } = req.body;
+
+        // Add post to user's posts
+        user.posts.push(content);
+
+        res.json({ message: 'Post created successfully', post: content });
+    });
+});
+
+// Serve static files (for your front-end HTML, JS, CSS)
+app.use(express.static('public'));
+
+// Start server
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});
