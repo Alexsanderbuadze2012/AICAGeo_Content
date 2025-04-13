@@ -46,23 +46,27 @@ signlink.addEventListener("click", function(event){
     history.pushState(null, "", "/");
 });
 
-function signUp(){
+function signUp() {
     const username = document.getElementById("usernamesign").value;
     const password = document.getElementById("passwordsign").value;
 
-    if (username && password){
-        let users = JSON.parse(localStorage.getItem('users')) || [];
-        const userExists = users.some(u => u.username === username);
-        if (userExists){
-            alert("Username already exists. Please choose another.");
-            return;
-        }
-        users.push({ username, password });
-        localStorage.setItem('users', JSON.stringify(users));
-        welcometext.textContent = "Welcome " + username;
-        alert("You have been signed up!");
-        showlogform();
-    } 
+    if (username && password) {
+        fetch("/api/signup",{
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === "User signed up successfully") {
+                alert("You have been signed up!");
+                showlogform();
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    }
     else{
         alert("Please fill in both fields.");
     }
@@ -107,10 +111,16 @@ function checkLoginStatus(){
 document.addEventListener("DOMContentLoaded", checkLoginStatus);
 
 function logout(){
-    localStorage.removeItem("loggedInUser");
-    welcometext.textContent = "Welcome, Guest";
-    alert("You have been logged out.");
-    window.location.href = "/home";
+    fetch("/api/logout",{
+        method: "POST"
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        welcometext.textContent = "Welcome, Guest";
+        window.location.href = "/home";
+    })
+    .catch(error => console.error("Error:", error));
 }
 
 function createPost(){
