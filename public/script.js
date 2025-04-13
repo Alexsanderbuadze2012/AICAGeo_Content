@@ -12,7 +12,7 @@ history.pushState(null, "", "/home");
 
 document.addEventListener("DOMContentLoaded", function () {
     if (navigator.userAgent.toLowerCase().match(/mobile|android|iphone|ipad|ipod/)) {
-        alert("Design of AICA Geo will be broken! Please enable 'Desktop Mode' on your phone");
+        alert("Design of AICA Geo may be broken! Please enable 'Desktop Mode' on your phone");
     }
 });
 
@@ -46,32 +46,6 @@ signlink.addEventListener("click", function (event) {
     history.pushState(null, "", "/");
 });
 
-function signUp() {
-    const username = document.getElementById("usernamesign").value;
-    const password = document.getElementById("passwordsign").value;
-    if (username && password) {
-        console.log("Signing up with:", username, password);  // Debug log
-        fetch("/api/signup", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Sign up response:", data);  // Debug log
-            if (data.message === "User signed up successfully") {
-                alert("You have been signed up!");
-                showlogform();
-            } else {
-                alert(data.message);
-            }
-        })
-        .catch(error => console.error("Sign up error:", error));
-    } else {
-        alert("Please fill in both fields.");
-    }
-}
-
 function logIn() {
     const username = document.getElementById("usernamelog").value;
     const password = document.getElementById("passwordlog").value;
@@ -85,9 +59,9 @@ function logIn() {
     .then(data => {
         console.log("Login response:", data);  // Debug log
         if (data.message.startsWith("Welcome back")) {
+            document.cookie = `authToken=${data.token}; path=/; max-age=3600`;  // Store token in cookies
             alert(data.message);
-            welcometext.textContent = data.message;
-            window.location.href = '/home';  // You might want to handle this without reloading
+            window.location.href = '/home'; // Redirect to home after login
         } else {
             alert("Invalid username or password!");
         }
@@ -96,24 +70,36 @@ function logIn() {
 }
 
 function checkLoginStatus() {
-    const logoutBtn = document.getElementById("logoutbtn");
-    const logBtn = document.getElementById("logbtn");
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    if (loggedInUser) {
-        document.querySelector("header p").textContent = `Welcome, ${loggedInUser}!`;
-        logoutBtn.style.display = "block";
-        logBtn.style.display = "none";
-        createpostbtn.style.display = "block";
-    } else {
-        logoutBtn.style.display = "none";
-        logBtn.style.display = "block";
-        createpostbtn.style.display = "none";
+    const token = document.cookie.split('=')[1];
+    if (!token) {
+        return;  // No token found, the user is not logged in
     }
+
+    fetch("/api/protected", {
+        method: "GET",
+        headers: {
+            'Authorization': `Bearer ${token}` // Get token from cookies
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message === "You are logged in!") {
+            document.querySelector("header p").textContent = `Welcome, ${data.user.username}!`;
+            document.getElementById("logoutbtn").style.display = "block";
+            document.getElementById("logbtn").style.display = "none";
+            document.getElementById("createpostbtn").style.display = "block";
+        } else {
+            document.getElementById("logoutbtn").style.display = "none";
+            document.getElementById("logbtn").style.display = "block";
+            document.getElementById("createpostbtn").style.display = "none";
+        }
+    })
+    .catch(error => console.error("Error:", error));
 }
 
 document.addEventListener("DOMContentLoaded", checkLoginStatus);
 
-function logout(){
+function logout() {
     fetch("/api/logout", { method: "POST" })
         .then(response => response.json())
         .then(data => {
@@ -128,4 +114,26 @@ function createPost() {
     goinform.style.display = "flex";
     createpostform.style.display = "flex";
     containerpostcls.style.display = "flex";
+}
+
+function submitPost() {
+    const token = document.cookie.split('=')[1];
+    const postContent = document.getElementById("postContent").value;
+
+    fetch("/api/createPost", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}` // Send token in header
+        },
+        body: JSON.stringify({ content: postContent })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message === "Post created successfully") {
+            alert(data.message);
+            window.location.href = "/home";  // Redirect or update UI accordingly
+        }
+    })
+    .catch(error => console.error("Error:", error));
 }
