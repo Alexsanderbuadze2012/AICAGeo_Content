@@ -35,7 +35,7 @@ app.post("/api/logout", (req, res) => {
     res.status(200).json({ message: "Logged out successfully" });
 });
 
-app.get("*", (req, res) => {
+app.get("/*", (req, res) => {
     res.sendFile(path.join(__dirname, "../public", "index.html"));
 });
 
