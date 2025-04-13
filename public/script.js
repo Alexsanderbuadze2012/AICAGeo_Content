@@ -83,8 +83,10 @@ function logIn() {
             if (data.message.startsWith("Welcome back")) {
                 alert(data.message);
                 welcometext.textContent = data.message;
-                window.location.href = '/home';
-            } else {
+                document.getElementById("homeView").style.display = "block";
+                document.getElementById("loginView").style.display = "none";
+            } 
+            else{
                 alert("Invalid username or password!");
             }
         })
