@@ -35,7 +35,19 @@ app.post("/api/logout", (req, res) => {
     res.status(200).json({ message: "Logged out successfully" });
 });
 
-app.get("/*", (req, res) => {
+app.get("/home", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public", "index.html"));
+});
+
+app.get("/login", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public", "index.html"));
+});
+
+app.get("/signup", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public", "index.html"));
+});
+
+app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../public", "index.html"));
 });
 
