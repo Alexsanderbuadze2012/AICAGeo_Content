@@ -50,21 +50,23 @@ function signUp() {
     const username = document.getElementById("usernamesign").value;
     const password = document.getElementById("passwordsign").value;
     if (username && password) {
+        console.log("Signing up with:", username, password);  // Debug log
         fetch("/api/signup", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username, password })
         })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message === "User signed up successfully") {
-                    alert("You have been signed up!");
-                    showlogform();
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch(error => console.error("Error:", error));
+        .then(response => response.json())
+        .then(data => {
+            console.log("Sign up response:", data);  // Debug log
+            if (data.message === "User signed up successfully") {
+                alert("You have been signed up!");
+                showlogform();
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => console.error("Sign up error:", error));
     } else {
         alert("Please fill in both fields.");
     }
@@ -73,24 +75,24 @@ function signUp() {
 function logIn() {
     const username = document.getElementById("usernamelog").value;
     const password = document.getElementById("passwordlog").value;
+    console.log("Logging in with:", username, password);  // Debug log
     fetch("/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.message.startsWith("Welcome back")) {
-                alert(data.message);
-                welcometext.textContent = data.message;
-                document.getElementById("homeView").style.display = "block";
-                document.getElementById("loginView").style.display = "none";
-            } 
-            else{
-                alert("Invalid username or password!");
-            }
-        })
-        .catch(error => console.error("Error:", error));
+    .then(response => response.json())
+    .then(data => {
+        console.log("Login response:", data);  // Debug log
+        if (data.message.startsWith("Welcome back")) {
+            alert(data.message);
+            welcometext.textContent = data.message;
+            window.location.href = '/home';  // You might want to handle this without reloading
+        } else {
+            alert("Invalid username or password!");
+        }
+    })
+    .catch(error => console.error("Login error:", error));
 }
 
 function checkLoginStatus() {
